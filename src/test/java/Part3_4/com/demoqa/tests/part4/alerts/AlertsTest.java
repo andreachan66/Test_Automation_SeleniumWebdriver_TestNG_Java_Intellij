@@ -1,0 +1,48 @@
+package Part3_4.com.demoqa.tests.part4.alerts;
+
+import Part3_4.com.demoqa.base.BaseTest;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+import static Utilities.SwitchToUtility.*;
+
+@Test
+public class AlertsTest extends BaseTest {
+
+
+    public void testInformationAlert() {
+      String expectedAlertText = "You clicked a button";
+
+      var alertsPage  =  homePage.goToAlertsFramesWindoesCard().clickAlerts();
+      alertsPage.clickInformationAlertButton();
+      Assert.assertEquals(getAlertText(), expectedAlertText, "\n " +
+              "Actual & Expected Messages Do Not Match \n");
+      acceptAlert();
+    }
+
+    public void testConfirmationAlert(){
+
+        var alertsPage = homePage.goToAlertsFramesWindoesCard().clickAlerts();
+        alertsPage.clickConfirmationAlertButton();
+        dismissAlert();
+
+        String actualConfirmationResult = alertsPage.getConfirmationResult();
+        String expectedConfirmationResult = "You selected Cancel";
+        Assert.assertEquals(actualConfirmationResult, expectedConfirmationResult, "\n You Did Not Select" +
+                "Cancel \n");
+    }
+
+    public void testPromptAlert(){
+        String alertText = "Selenium With Java";
+        String expectedResult = "You entered " + alertText;
+
+        var alertsPage  = homePage.goToAlertsFramesWindoesCard().clickAlerts();
+        alertsPage.clickPromptAlertButton();
+
+        setAlertText(alertText);
+        acceptAlert();
+        String actualResult = alertsPage.getPromptResult();
+        Assert.assertEquals(actualResult, expectedResult, "\n" +
+                "Actual & Expected Results Do Not Match \n");
+    }
+}

@@ -1,0 +1,40 @@
+package Part3_4.com.demoqa.tests.part4.frames;
+
+import Part3_4.com.demoqa.base.BaseTest;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+public class FramesTest extends BaseTest {
+
+    @Test
+    public void testFramesBigBox(){
+      var framesPage =   homePage.goToAlertsFramesWindoesCard().clickFrames();
+      String actualBigBoxText  = framesPage.getTextInBigFrame();
+      String expectedBigBoxText = "This is a sample page";
+      Assert.assertEquals(actualBigBoxText, expectedBigBoxText, "\n Actual & Expected Text " +
+                "Do Not Match  \n");
+      String actualHeaderText = framesPage.getHeaderFramesText();
+      String expectedHeaderText = "Frames";
+      Assert.assertEquals(actualHeaderText, expectedHeaderText, "\nActual & Expected Text Do Not Match\n");
+
+    }
+
+    @Test
+    public void testFrameSmallBox(){
+        var framesPage = homePage.goToAlertsFramesWindoesCard().clickFrames();
+
+        String actualSmallBoxText = framesPage.getTextInSmallFrame();
+        String expectedSmalBoxText = "This is a sample page";
+        Assert.assertEquals(actualSmallBoxText, expectedSmalBoxText, "" +
+                "\n Actual & Expected Text Do Not Match " +
+                "\n");
+
+        String actualHeaderText = framesPage.getHeaderFramesText();
+        String expectedHeaderText = "Frames";
+        Assert.assertEquals(actualHeaderText, expectedHeaderText,
+                "\n Actual & Expected Header Text Do Not Match " +
+                        "\n");
+
+    }
+
+}
